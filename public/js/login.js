@@ -61,6 +61,8 @@ $(function() {
             }),
             success: (res) => {
                 if(!res.operation) return toastr.warning("Invalid email!")
+                clearInput()
+                $(".shadow").fadeToggle("fast")
                 return toastr.success(res.msg)
             },
             error: (error) => {
@@ -84,11 +86,12 @@ $(function() {
     })
 
     $("#reset").click(function(e) {
-        $(".shadow").fadeIn("fast")
+        $(".shadow").fadeToggle("fast")
+        clearInput()
     })
 
     $(".shadow").click(function(e) {
-        $(this).fadeOut("fast")
+        $(this).fadeToggle("fast")
     })
 
     $(".reset-form").click(function(e) {

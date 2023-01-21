@@ -13,6 +13,6 @@ module.exports = (email, req) => {
         from: `"Bert's Piggery" <opas.system@gmail.com>`,
         to: email,
         subject: `Reset Password`,
-        html: `<b>Click this <a href="http://${req.header('host')}/client/reset?email=${email}">link</a> to reset password of your account.</b>`
+        html: `<b>Click this <a href="http://${req.header('host')}/reset?email=${email}">link</a> to reset password of your account.</b>`
     })
 }
