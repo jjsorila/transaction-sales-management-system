@@ -13,7 +13,12 @@ app.use(cookieSession({
 app.use(express.json(), express.urlencoded({ extended: true }))
 
 //ROUTES
-app.get("/", )
+
+//API
+app.use("/api", require("./controllers/api"))
+
+//VIEWS
+app.use("/", require("./controllers/admin"))
 
 
 //DB & PORT CONNECTION
