@@ -1,0 +1,142 @@
+<style>
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 10px;
+        width: 100%;
+        height: 120px;
+        position: sticky;
+        top: 0;
+        z-index: 4;
+        background: var(--dark-main);
+    }
+
+    .profile {
+        height: 65px;
+        width: 65px;
+        position: relative;
+    }
+
+    .profile>img {
+        display: block;
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .icon {
+        transition: all 0.2s linear;
+    }
+
+    .label-box {
+        height: 50px;
+        width: 50px;
+        border-radius: 50%;
+        transition: all 0.2s linear;
+        cursor: pointer;
+    }
+
+    .label-box:hover {
+        box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
+        -webkit-box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
+        -moz-box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
+    }
+
+    #toggler:checked~.content .icon {
+        transform: rotate(180deg);
+    }
+
+    .bubble {
+        position: absolute;
+        background: var(--dark-main);
+        color: #FFFFFF;
+        left: -325px;
+        top: 80px;
+        font-family: Arial;
+        font-size: 20px;
+        line-height: 120px;
+        text-align: center;
+        width: 400px;
+        height: 200px;
+        border-radius: 10px;
+        padding: 0px;
+        z-index: 3;
+        border: white 3px solid;
+        display: none;
+    }
+
+    .bubble:after {
+        content: '';
+        position: absolute;
+        display: block;
+        width: 0;
+        z-index: 1;
+        border-style: solid;
+        border-color: white transparent;
+        border-width: 0 8px 10px;
+        top: -10px;
+        left: 90%;
+        margin-left: -8px;
+    }
+</style>
+
+<!-- <input type="checkbox" style="display: none;" id="profile-toggler" /> -->
+<div class="nav border-bottom border-light border-5 mb-4 p-4 px-5">
+    <label for="toggler" class="label-box d-flex d-xl-none justify-content-center align-items-center"><i
+            class="bi bi-list fs-1 icon"></i></label>
+    <h1 class="fw-bolder">
+        <%= title %>
+    </h1>
+    <div class="profile">
+        <img src="/images/placeholder.jpg" />
+        <div class="bubble" id="dropdown">
+            <div
+                class="inner text-light p-4 w-100 h-100 d-flex flex-column justify-content-center align-items-center gap-4">
+                <h3 class="m-0 pb-3 border-bottom border-light border-3 w-100">
+                    <%= admin.username %>
+                </h3>
+                <button id="logout" class="btn text-light border border-light border-3 w-50 mx-auto">LOGOUT</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+
+        $(".profile").click(function (e) {
+            $("#dropdown").fadeToggle("fast")
+        })
+
+        $("#dropdown").click(function (e) {
+            e.stopPropagation()
+        })
+
+        $("#logout").click(function (e) {
+
+            $(".loading").css({
+                display: "block"
+            })
+
+            $.ajax({
+                url: "/api/logout",
+                type: "GET",
+                success: (res) => {
+                    if (!res.operation) return toastr.warning("Something went wrong")
+                    location.replace("/")
+                },
+                error: (error) => {
+                    toastr.error("Server error")
+                    console.log(error)
+                },
+                complete: () => {
+                    $(".loading").css({
+                        display: "none"
+                    })
+                }
+            })
+        })
+    })
+</script>

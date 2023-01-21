@@ -1,0 +1,122 @@
+<style>
+    .sidebar {
+        height: 100vh;
+        width: 300px;
+        transition: all 0.2s;
+        z-index: 6;
+        overflow: hidden;
+        color: white;
+    }
+
+    .shadow {
+        position: fixed;
+        display: none;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 5;
+    }
+
+    .space {
+        height: 100vh;
+        width: 300px;
+    }
+
+    #toggler {
+        display: none;
+    }
+
+    #toggler:checked~.sidebar {
+        width: 300px;
+    }
+
+    .sidebar-header {
+        height: 120px;
+        padding: 30px;
+    }
+
+    .sidebar-header h1 {
+        font-size: 30px;
+    }
+
+    .sidebar li ul {
+        height: 50px;
+        cursor: pointer;
+    }
+
+    .sidebar li ul:hover {
+        background: white;
+        color: black !important;
+        /* border-radius: 0 20px 20px 0; */
+    }
+
+    .active {
+        background: white;
+        color: black !important;
+    }
+
+    @media screen and (max-width: 1200px) {
+        .sidebar {
+            width: 0;
+            background-color: var(--dark-main);
+        }
+
+        .content {
+            width: 100%;
+        }
+    }
+</style>
+
+
+<input id="toggler" type="checkbox" />
+<div class="space d-none d-xl-block"></div>
+<div class="shadow"></div>
+<div class="sidebar d-flex flex-column position-fixed top-0 border-end border-4 border-light">
+    <div class="border-bottom mb-4 border-light border-5 sidebar-header d-flex justify-content-between align-items-center text-center">
+        <div class="img-header">
+            <img src="/images/favicon.ico" height="50px" width="50px"/>
+        </div>
+        <h1 class="fw-bolder">Bert's Piggery</h1>
+    </div>
+    <li class="d-flex flex-column text-light gap-1">
+        <ul class="d-flex gap-3 fw-bold align-items-center fs-5" id="dashboard"><i class="bi bi-house-door-fill"></i>Dashboard</ul>
+        <ul class="d-flex gap-3 fw-bold align-items-center fs-5" id="expenses"><i class="bi bi-cash-stack"></i>Expenses</ul>
+        <ul class="d-flex gap-3 fw-bold align-items-center fs-5" id="transactions"><i class="bi bi-clipboard-check-fill"></i>Transactions</ul>
+        <ul class="d-flex gap-3 fw-bold align-items-center fs-5" id="account"><i class="bi bi-gear-fill"></i>Settings</ul>
+    </li>
+</div>
+
+<script>
+    $(function () {
+
+        const url = location.href.split("/")
+
+        $(`#${url[url.length-1]}`).addClass("active")
+
+        $(".shadow").click(function () {
+            $(this).fadeOut("fast")
+            $("#toggler").prop("checked", false)
+        })
+
+        $("#toggler").change(function () {
+            if ($(this).prop("checked")) {
+                $(".shadow").fadeIn("fast")
+            }
+        })
+
+        $(".sidebar li ul").click(function() {
+            location.href = `/${$(this).prop("id")}`
+        })
+
+        $(window).resize(function () {
+            const width = $(window).width()
+
+            if (width > 1200) {
+                $(".shadow").fadeOut("fast")
+                $("#toggler").prop("checked", false)
+            }
+        })
+    })
+</script>

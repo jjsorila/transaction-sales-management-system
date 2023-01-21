@@ -1,12 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%- include("../components/header.ejs") %>
+        <link rel="stylesheet" href="/css/login.css" />
 </head>
+
 <body>
-    <h1>Login Page</h1>
+    <div class="container border border-light border-3 c-container p-4">
+        <h1 class="text-center text-light title">LOGIN</h1>
+        <div class="d-flex flex-column justify-content-evenly align-items-center c-form px-3">
+            <div class="input-group">
+                <span class="input-group-text  border-3  bg-light" id="basic-addon1"><i
+                        class="bi bi-person-check-fill text-dark"></i></span>
+                <input type="text" class="form-control  border-3  text-dark" placeholder="Username"
+                    aria-label="Username" id="username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group d-flex flex-column">
+                <div class="input-group">
+                    <span class="input-group-text  border-3  bg-light" id="basic-addon1"><i
+                            class="bi bi-key-fill text-dark"></i></span>
+                    <input type="password" id="password" class="form-control  border-3 text-dark" placeholder="Password"
+                        aria-label="Password" aria-describedby="basic-addon1">
+                </div>
+                <div class="ms-1 mt-2">
+                    <input type="checkbox" id="show">
+                    <label class="form-check-label" for="show">Show Password</label>
+                </div>
+            </div>
+            <div class="form-group w-100 d-flex flex-column align-items-center c-btn">
+                <button type="button" class="btn w-100" id="login">LOGIN</button>
+                <label class="btn" id="reset">RESET PASSWORD</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="shadow">
+        <div class="reset-form container p-4">
+            <h1 class="fw-bolder text-center text-dark reset-title">RESET PASSWORD</h1>
+            <div class="d-flex flex-column justify-content-center align-items-center gap-5 c-form-reset px-3">
+                <div class="input-group">
+                    <span class="input-group-text border-3 border-dark bg-light" id="basic-addon1"><i
+                            class="bi bi-person-check-fill text-dark"></i></span>
+                    <input type="email" id="email" class="form-control border-dark border-3 text-dark"
+                        placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                </div>
+                <div class="btn-group c-btn" role="group" aria-label="Basic example">
+                    <button type="button" class="btn w-50" id="send-link">SEND LINK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../components/loading.ejs") %>
+        <%- include("../components/footer.ejs") %>
+            <script src="/build/toastr.min.js"></script>
+            <script src="/js/options.js"></script>
+        <script type="application/javascript" src="/js/login.js"></script>
 </body>
+
 </html>

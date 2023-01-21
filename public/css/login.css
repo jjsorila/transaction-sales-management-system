@@ -1,0 +1,57 @@
+* {
+    color: white !important;
+}
+
+.c-container {
+    height: 500px;
+    margin-top: 4%;
+    max-width: 400px;
+    /* From https://css.glass */
+    background: rgba(255, 255, 255, 0.29);
+    border-radius: 30px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10.2px);
+    -webkit-backdrop-filter: blur(10.2px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.title {
+    height: calc(100% - 90%);
+    font-weight: 900;
+    letter-spacing: 4px;
+}
+
+.c-form {
+    height: 90%;
+}
+
+.c-btn button {
+    background: var(--dark-main) !important;
+}
+
+.shadow {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    display: none;
+}
+
+.reset-form {
+    height: 500px;
+    margin-top: 4%;
+    max-width: 400px;
+    background: white;
+    border-radius: 30px;
+}
+
+.c-form-reset {
+    height: 90%;
+}
+
+.reset-title {
+    height: calc(100%-90%);
+}

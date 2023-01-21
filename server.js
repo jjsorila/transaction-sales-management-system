@@ -13,7 +13,6 @@ app.use(cookieSession({
 app.use(express.json(), express.urlencoded({ extended: true }))
 
 //ROUTES
-
 //API
 app.use("/api", require("./controllers/api"))
 

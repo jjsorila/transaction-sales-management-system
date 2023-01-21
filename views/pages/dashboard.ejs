@@ -1,14 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="username" content="<%= admin.username %> " />
     <%- include("../components/header.ejs") %>
+        <link rel="stylesheet" href="/css/dashboard.css" />
 </head>
-<body>
-    <h1>Dashboard Page</h1>
-    <div id="calendar"></div>
-    <script type="application/javascript" src="/js/dashboard.js"></script>
+
+<body class="d-flex p-0">
+    <%- include("../components/sidebar.ejs") %>
+        <div class="content text-light">
+            <%- include("../components/navbar.ejs", { title: "Dashboard" }) %>
+                <div class="btn-group c-btn-group mb-3" role="group" aria-label="Basic mixed styles example">
+                    <button type="button" class="btn btn-success" id="add">ADD EVENT</button>
+                    <button type="button" class="btn btn-danger" id="remove">REMOVE EVENT</button>
+                </div>
+                <div class="container calendar">
+                    <div id="calendar"></div>
+                </div>
+        </div>
+        <input type="hidden" id="index-holder"/>
+
+        <div class="event-shadow">
+            <div class="event-form p-4 h-75 d-flex flex-column justify-content-around align-items-center">
+                <h1 class="text-center">ADD EVENT</h1>
+                <div class="form-group w-100">
+                    <input type="text" class="rounded border text-center border-3 w-100 border-dark p-2"
+                        placeholder="Event Title" id="badge" />
+                </div>
+                <div class="form-group w-100">
+                    <input type="text" class="rounded border text-center border-3 w-100 border-dark p-2"
+                        placeholder="Event Description" id="desc" />
+                </div>
+                <div class="form-group w-100">
+                    <input type="date" class="rounded border text-center border-3 w-100 border-dark p-2"
+                        id="event_date" />
+                </div>
+                <div class="form-group px-5 w-100">
+                    <button class="btn btn-success w-100 p-2 container" id="submit-add">ADD</button>
+                </div>
+            </div>
+        </div>
+
+        <%- include("../components/loading.ejs") %>
+        <%- include("../components/footer.ejs") %>
+            <script src="/build/toastr.min.js"></script>
+            <script src="/js/options.js"></script>
+                <script type="application/javascript" src="/js/dashboard.js"></script>
 </body>
+
 </html>
