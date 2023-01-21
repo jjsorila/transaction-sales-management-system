@@ -13,9 +13,11 @@
     }
 
     .profile {
+        border-radius: 50%;
         height: 65px;
         width: 65px;
         position: relative;
+        transition: all 0.2s linear;
     }
 
     .profile>img {
@@ -39,6 +41,12 @@
     }
 
     .label-box:hover {
+        box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
+        -webkit-box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
+        -moz-box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
+    }
+
+    .profile:hover {
         box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
         -webkit-box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
         -moz-box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
@@ -97,7 +105,8 @@
                 <h3 class="m-0 pb-3 border-bottom border-light border-3 w-100">
                     <%= admin.username %>
                 </h3>
-                <button id="logout" class="btn btn-danger text-light border border-light border-3 w-50 mx-auto">SIGN OUT</button>
+                <button id="logout" class="btn btn-danger text-light border border-light border-3 w-50 mx-auto">SIGN
+                    OUT</button>
             </div>
         </div>
     </div>
@@ -107,7 +116,12 @@
     $(function () {
 
         $(".profile").click(function (e) {
+            e.stopPropagation()
             $("#dropdown").fadeToggle("fast")
+        })
+
+        $(".content,.sidebar").click(function (e) {
+            $("#dropdown").fadeOut("fast")
         })
 
         $("#dropdown").click(function (e) {
