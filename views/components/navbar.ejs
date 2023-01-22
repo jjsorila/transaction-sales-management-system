@@ -41,13 +41,11 @@
     }
 
     .label-box:hover {
-        box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
-        -webkit-box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
-        -moz-box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
+        background: rgba(224, 220, 220, 0.2);
     }
 
     .profile:hover {
-        box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
+        box-shadow: 1px 0px 53px 10px ;
         -webkit-box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
         -moz-box-shadow: 1px 0px 53px 10px rgba(224, 220, 220, 0.75);
     }
@@ -144,11 +142,6 @@
                 error: (error) => {
                     toastr.error("Server error")
                     console.log(error)
-                },
-                complete: () => {
-                    $(".loading").css({
-                        display: "none"
-                    })
                 }
             })
         })

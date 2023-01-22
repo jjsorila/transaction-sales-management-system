@@ -12,10 +12,70 @@
 <body class="d-flex p-0">
     <%- include("../components/sidebar.ejs") %>
         <div class="content text-light">
-            <%- include("../components/navbar.ejs", { title: "Settings" }) %>
-                <div class="container calendar">
-                    <div id="calendar"></div>
+            <%- include("../components/navbar.ejs", { title: "Accounts" }) %>
+                <div class="container main">
+                    <div class="d-flex justify-content-start my-3">
+                        <button type="button" class="btn btn-success" id="add-account">ADD ACCOUNT</button>
+                    </div>
+                    <div class="table bg-light p-4 border border-5 border-light rounded">
+                        <table id="dataTable" class="table text-center table-striped table-hover">
+                            <thead>
+                                <th class="text-center">USERNAME</th>
+                                <th class="text-center">EMAIL</th>
+                                <th class="text-center">ACTIONS</th>
+                            </thead>
+                        </table>
+                    </div>
                 </div>
+        </div>
+
+        <div class="event-shadow add-shadow">
+            <div class="event-form p-4 h-75 d-flex flex-column justify-content-around align-items-center rounded">
+                <h1 class="text-center">ADD ACCOUNT</h1>
+                <div class="form-group w-100">
+                    <input type="text" class="rounded border text-center border-3 w-100 border-dark p-2"
+                        placeholder="Username" id="a-username" />
+                </div>
+                <div class="form-group w-100">
+                    <input type="text" class="rounded border text-center border-3 w-100 border-dark p-2"
+                        placeholder="Email" id="a-email" />
+                </div>
+                <div class="form-group w-100">
+                    <input type="password" class="rounded border text-center border-3 w-100 border-dark p-2"
+                        placeholder="Password" id="a-password" />
+                    <div class="form-check mt-2">
+                        <input class="form-check-input border border-dark border-2" type="checkbox" id="a-show-pass">
+                        <label class="form-check-label" for="a-show-pass">Show Password</label>
+                    </div>
+                </div>
+                <div class="form-group px-5 w-100">
+                    <button class="btn btn-success border border-dark border-3 w-100 p-2 container" id="submit-add">ADD</button>
+                </div>
+            </div>
+        </div>
+
+        <input type="hidden" id="user-holder"/>
+
+        <div class="event-shadow edit-shadow">
+            <div class="event-form p-4 h-75 d-flex flex-column justify-content-around align-items-center rounded">
+                <h1 class="text-center">EDIT ACCOUNT</h1>
+                <div class="form-group w-100">
+                    <input type="text" class="rounded border text-center border-3 w-100 border-dark p-2"
+                        placeholder="Email" id="e-email" />
+                </div>
+                <div class="form-group w-100">
+                    <input type="password" class="rounded border text-center border-3 w-100 border-dark p-2"
+                        placeholder="New Password" id="e-password" />
+                    <div class="form-check mt-2">
+                        <input class="form-check-input border border-dark border-2" type="checkbox" id="e-show-pass">
+                        <label class="form-check-label" for="e-show-pass">Show Password</label>
+                    </div>
+                </div>
+
+                <div class="form-group px-5 w-100">
+                    <button class="btn btn-warning border border-dark border-3 w-100 p-2 container" id="submit-edit">EDIT</button>
+                </div>
+            </div>
         </div>
 
         <%- include("../components/loading.ejs") %>

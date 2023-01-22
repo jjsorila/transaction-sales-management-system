@@ -7,7 +7,3 @@ body {
     width: calc(100% - 300px);
     height: 200vh;
 }
-
-.calendar {
-    width: 90%;
-}

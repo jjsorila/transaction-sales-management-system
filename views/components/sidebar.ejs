@@ -84,7 +84,9 @@
         <ul class="d-flex gap-3 fw-bold align-items-center fs-5" id="dashboard"><i class="bi bi-house-door-fill"></i>Dashboard</ul>
         <ul class="d-flex gap-3 fw-bold align-items-center fs-5" id="expenses"><i class="bi bi-cash-stack"></i>Expenses</ul>
         <ul class="d-flex gap-3 fw-bold align-items-center fs-5" id="transactions"><i class="bi bi-clipboard-check-fill"></i>Transactions</ul>
-        <ul class="d-flex gap-3 fw-bold align-items-center fs-5" id="account"><i class="bi bi-gear-fill"></i>Settings</ul>
+        <% if(admin.username == "admin") { %>
+            <ul class="d-flex gap-3 fw-bold align-items-center fs-5" id="account"><i class="bi bi-gear-fill"></i>Accounts</ul>
+        <% } %>
     </li>
 </div>
 

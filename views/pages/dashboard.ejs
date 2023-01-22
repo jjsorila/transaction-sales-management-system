@@ -14,18 +14,19 @@
     <%- include("../components/sidebar.ejs") %>
         <div class="content text-light">
             <%- include("../components/navbar.ejs", { title: "Dashboard" }) %>
-                <div class="btn-group c-btn-group mb-3" role="group" aria-label="Basic mixed styles example">
-                    <button type="button" class="btn btn-success" id="add">ADD EVENT</button>
-                    <button type="button" class="btn btn-danger" id="remove">REMOVE EVENT</button>
+                <div class="container d-flex justify-content-start c-btn-group my-3">
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                        <button type="button" class="btn btn-success" id="add">ADD EVENT</button>
+                        <button type="button" class="btn btn-danger" id="remove">REMOVE EVENT</button>
+                    </div>
                 </div>
                 <div class="container calendar">
                     <div id="calendar"></div>
                 </div>
         </div>
         <input type="hidden" id="index-holder"/>
-
         <div class="event-shadow">
-            <div class="event-form p-4 h-75 d-flex flex-column justify-content-around align-items-center">
+            <div class="event-form p-4 h-75 d-flex flex-column justify-content-around align-items-center rounded">
                 <h1 class="text-center">ADD EVENT</h1>
                 <div class="form-group w-100">
                     <input type="text" class="rounded border text-center border-3 w-100 border-dark p-2"

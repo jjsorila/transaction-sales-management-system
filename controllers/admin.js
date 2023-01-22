@@ -44,14 +44,14 @@ router.get("/transactions", isLoggedOut, (req, res) => {
 })
 
 //EDIT EXPENSE PAGE
-router.get("/expenses/:id", isLoggedOut, (req, res) => {
-    res.render("pages/forms/expense.ejs", { admin: req.session.admin })
-})
+// router.get("/expenses/:id", isLoggedOut, (req, res) => {
+//     res.render("pages/forms/expense.ejs", { admin: req.session.admin })
+// })
 
 //EDIT TRANSACTION PAGE
-router.get("/transactions/:id", isLoggedOut, (req, res) => {
-    res.render("pages/forms/transaction.ejs", { admin: req.session.admin })
-})
+// router.get("/transactions/:id", isLoggedOut, (req, res) => {
+//     res.render("pages/forms/transaction.ejs", { admin: req.session.admin })
+// })
 
 
 module.exports = router;

@@ -13,9 +13,51 @@
     <%- include("../components/sidebar.ejs") %>
         <div class="content text-light">
             <%- include("../components/navbar.ejs", { title: "Transactions" }) %>
-                <div class="container calendar">
-                    <div id="calendar"></div>
+                <div class="container main">
+                    <div class="expense-form bg-light mb-3 rounded p-4 d-flex flex-column justify-content-center align-items-center">
+                        <div class="w-100 form-group mb-3 gap-2 d-flex flex-column flex-lg-row justify-content-center align-items-center align-items-lg-center">
+                            <input type="text" class="text-center border border-dark border-3 rounded p-2 w-50" id="recipient" placeholder="Recipient"/>
+                            <input type="number" class="text-center border border-dark border-3 rounded p-2 w-50" id="quantity" placeholder="Quantity"/>
+                            <input type="number" class="text-center border border-dark border-3 rounded p-2 w-50" id="unit_price" placeholder="Price Per Unit"/>
+                            <input type="date" class="text-center border border-dark border-3 rounded p-2 w-50" id="transaction_date" placeholder="Transaction Date"/>
+                        </div>
+                        <button class="btn btn-success border border-dark border-3 w-50" id="add-expense">ADD RECORD</button>
+                    </div>
+                    <div class="table bg-light p-4 border border-5 border-light rounded">
+                        <div class="d-flex align-items-center gap-3">
+                            <h3>Date Range: </h3>
+                            <input type="text" class="text-center border border-dark border-3 rounded p-2" id="daterange" />
+                        </div>
+                        <table id="dataTable" class="table text-center table-striped table-hover">
+                            <thead>
+                                <th class="text-center">RECIPIENT</th>
+                                <th class="text-center">QUANTITY</th>
+                                <th class="text-center">PRICE PER UNIT</th>
+                                <th class="text-center">TOTAL PRICE</th>
+                                <th class="text-center">DATE</th>
+                                <th class="text-center">ACTIONS</th>
+                            </thead>
+                        </table>
+                        <h1 class="total mt-4 d-flex fs-3 fw-bolder"></h1>
+                    </div>
                 </div>
+        </div>
+
+        <div class="to-print">
+            <div class="p-header d-flex justify-content-center border-bottom border-dark border-4 align-items-center gap-4 pb-2 mb-4">
+                <div class="p-profile">
+                    <img src="/images/favicon.ico" />
+                </div>
+                <h1 class="m-0 p-0 text-center fw-bolder">BERT'S PIGGERY</h1>
+            </div>
+
+            <div class="p-main border border-dark border-4 rounded p-4 d-flex flex-column gap-5">
+                <h1 class="fs-2" id="p-date"></h1>
+                <h1 class="fs-2" id="p-recipient"></h1>
+                <h1 class="fs-2" id="p-quantity"></h1>
+                <h1 class="fs-2" id="p-unit_price"></h1>
+                <h1 class="fs-2" id="p-total_price"></h1>
+            </div>
         </div>
 
         <%- include("../components/loading.ejs") %>

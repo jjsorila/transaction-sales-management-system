@@ -8,6 +8,65 @@ body {
     height: 200vh;
 }
 
-.calendar {
+.main {
     width: 90%;
+}
+
+.expense-form {
+    min-height: 200px;
+}
+
+.to-print {
+    display: none;
+    color: black !important;
+}
+
+@media print {
+    .content {
+        display: none !important;
+    }
+
+    .sidebar {
+        display: none !important;
+    }
+
+    .navbar {
+        display: none !important;
+    }
+
+    .to-print {
+        display: block !important;
+    }
+
+    .p-header {
+        width: 100vw;
+    }
+
+    .p-main {
+        height: fit-content;
+    }
+
+    .p-profile {
+        border-radius: 50%;
+        height: 65px;
+        width: 65px;
+        position: relative;
+        transition: all 0.2s linear;
+    }
+
+    .p-profile>img {
+        display: block;
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .loading {
+        display: none !important;
+    }
+
+    .p-main > h1 {
+        letter-spacing: 5px;
+    }
 }

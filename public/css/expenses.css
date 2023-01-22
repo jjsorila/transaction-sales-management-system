@@ -8,6 +8,10 @@ body {
     height: 200vh;
 }
 
-.calendar {
+.main {
     width: 90%;
+}
+
+.expense-form {
+    min-height: 200px;
 }

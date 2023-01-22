@@ -13,10 +13,7 @@ body {
 }
 
 .c-btn-group {
-    position: relative;
-    left: 50%;
-    max-width: 300px;
-    transform: translateX(-50%);
+    width: 90%;
 }
 
 .event-shadow {
