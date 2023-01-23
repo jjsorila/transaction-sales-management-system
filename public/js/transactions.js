@@ -3,6 +3,7 @@ $(function () {
     const quantity = $("#quantity")
     const unit_price = $("#unit_price")
     const transaction_date = $("#transaction_date")
+    const id_handler = $("#handler")
 
     function clearInput() {
         recipient.val("")
@@ -108,7 +109,12 @@ $(function () {
     })
 
     $("table").on("click", ".delete", function() {
-        const id = $(this).prop("id")
+        id_handler.val($(this).prop("id"))
+        $(".c-warning").fadeToggle("fast")
+    })
+
+    $("#warning-yes").click(function() {
+        const id = id_handler.val()
         $(".loading").css({
             display: "block"
         })
@@ -125,6 +131,7 @@ $(function () {
                     })
                     $(".total").text(`Total Income: ₱ ${total}`)
                 })
+                $(".c-warning").fadeToggle("fast")
                 return toastr.success(res.msg)
             },
             error: (err) => {
@@ -137,6 +144,10 @@ $(function () {
                 })
             }
         })
+    })
+
+    $("#warning-no").click(function() {
+        $(".c-warning").fadeToggle("fast")
     })
 
     $("#dataTable").on("click", ".print", function() {

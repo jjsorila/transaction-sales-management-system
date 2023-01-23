@@ -13,7 +13,7 @@ app.use(cookieSession({
 app.use(express.json(), express.urlencoded({ extended: true }))
 
 //ROUTES
-//API
+//A.P.I.
 app.use("/api", require("./controllers/api"))
 
 //VIEWS
@@ -23,9 +23,8 @@ app.use("/", require("./controllers/admin"))
 //DB & PORT CONNECTION
 db.connect((error) => {
     if(error) throw error;
-
-    app.listen(5000, () => {
-        console.log("Listening to port 5000")
+    app.listen(80, () => {
+        console.log("Listening to port 80")
         console.log("Database Connected")
     })
 })

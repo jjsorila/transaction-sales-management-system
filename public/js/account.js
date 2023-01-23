@@ -5,6 +5,7 @@ $(function() {
     const a_email = $("#a-email")
     const a_password = $("#a-password")
     const user_holder = $("#user-holder")
+    const id_handler = $("#handler")
 
     function clearInput(){
         e_email.val("")
@@ -134,8 +135,11 @@ $(function() {
 
     //DELETE ACCOUNT
     $("table").on("click", ".delete", function() {
-        const username = $(this).prop("id")
-
+        id_handler.val($(this).prop("id"))
+        $(".c-warning").fadeToggle("fast")
+    })
+    $("#warning-yes").click(function() {
+        const username = id_handler.val()
         $(".loading").css({
             display: "block"
         })
@@ -146,6 +150,7 @@ $(function() {
             success: (res) => {
                 if(!res.operation) return toastr.error("Something went wrong")
                 $("#dataTable").DataTable().ajax.reload()
+                $(".c-warning").fadeToggle("fast")
                 return toastr.success(res.msg)
             },
             error: (error) => {
@@ -158,6 +163,9 @@ $(function() {
                 })
             }
         })
+    })
+    $("#warning-no").click(function() {
+        $(".c-warning").fadeToggle("fast")
     })
 
     //ADD ACCOUNT

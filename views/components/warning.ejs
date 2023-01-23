@@ -1,0 +1,48 @@
+<style>
+    .c-warning {
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.6);
+        display: none;
+    }
+
+    .c-form-warning {
+        height: auto;
+        width: 50vw;
+        display: block !important;
+        position: relative;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .c-btn-group {
+        width: 100%;
+    }
+</style>
+
+<div class="c-warning">
+    <div class="c-form-warning rounded bg-light p-5">
+        <h1 class="text-center pb-5 border-bottom border-dark border-4">Do you want to confirm this action?</h1>
+        <div class="c-btn-group d-flex justify-content-center gap-4">
+            <button class="btn btn-success px-3 py-2 fs-4 border border-dark border-3" id="warning-yes">YES</button>
+            <button class="btn btn-danger px-3 py-2 fs-4 border border-dark border-3" id="warning-no">NO</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function() {
+        $(".c-warning").click(function() {
+            $(this).fadeToggle("fast")
+        })
+
+        $(".c-form-warning").click(function(e) {
+            e.stopPropagation()
+        })
+    })
+</script>

@@ -3,6 +3,7 @@ $(function () {
     const quantity = $("#quantity")
     const unit_price = $("#unit_price")
     const expense_date = $("#expense_date")
+    const id_handler = $("#handler")
 
     function clearInput() {
         item.val("")
@@ -104,8 +105,13 @@ $(function () {
         })
     })
 
-    $("table").on("click", ".delete", function() {
-        const id = $(this).prop("id")
+    $("#dataTable").on("click", ".delete", function() {
+        $(".c-warning").fadeToggle("fast")
+        id_handler.val($(this).prop("id"))
+    })
+
+    $("#warning-yes").click(function() {
+        const id = id_handler.val()
         $(".loading").css({
             display: "block"
         })
@@ -122,6 +128,7 @@ $(function () {
                     })
                     $(".total").text(`Total Expense: ₱ ${total}`)
                 })
+                $(".c-warning").fadeToggle("fast")
                 return toastr.success(res.msg)
             },
             error: (err) => {
@@ -134,6 +141,10 @@ $(function () {
                 })
             }
         })
+    })
+
+    $("#warning-no").click(function() {
+        $(".c-warning").fadeToggle("fast")
     })
 
     $("#daterange").daterangepicker();
