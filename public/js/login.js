@@ -86,6 +86,7 @@ $(function() {
     })
 
     $("#reset").click(function(e) {
+        return toastr.error("Sending reset password link temporarily disabled")
         $(".shadow").fadeToggle("fast")
         clearInput()
     })

@@ -23,8 +23,8 @@ app.use("/", require("./controllers/admin"))
 //DB & PORT CONNECTION
 db.connect((error) => {
     if(error) throw error;
-    app.listen(80, () => {
-        console.log("Listening to port 80")
+    app.listen(5000, () => {
+        console.log("Listening to port 5000")
         console.log("Database Connected")
     })
 })
