@@ -51,32 +51,32 @@ $(function () {
     })
 
     //REMOVE EVENT
-    $("#remove").click(function() {
-        if(!event_index.val()) return toastr.warning("Select event to remove")
+    // $("#remove").click(function() {
+    //     if(!event_index.val()) return toastr.warning("Select event to remove")
 
-        $(".loading").css({
-            display: "block"
-        })
+    //     $(".loading").css({
+    //         display: "block"
+    //     })
 
-        $.ajax({
-            url: `/api/event/delete?event_id=${event_index.val()}`,
-            type: "DELETE",
-            success: (res) => {
-                if(!res.operation) return toastr.warning("Something went wrong")
-                toastr.success(res.msg)
-                $('#calendar').evoCalendar('removeCalendarEvent', event_index.val());
-            },
-            error: (err) => {
-                toastr.error("Server Error")
-                console.log(err)
-            },
-            complete: () => {
-                $(".loading").css({
-                    display: "none"
-                })
-            }
-        })
-    })
+    //     $.ajax({
+    //         url: `/api/event/delete?event_id=${event_index.val()}`,
+    //         type: "DELETE",
+    //         success: (res) => {
+    //             if(!res.operation) return toastr.warning("Something went wrong")
+    //             toastr.success(res.msg)
+    //             $('#calendar').evoCalendar('removeCalendarEvent', event_index.val());
+    //         },
+    //         error: (err) => {
+    //             toastr.error("Server Error")
+    //             console.log(err)
+    //         },
+    //         complete: () => {
+    //             $(".loading").css({
+    //                 display: "none"
+    //             })
+    //         }
+    //     })
+    // })
 
     //ADD EVENT
     $("#submit-add").click(function () {
@@ -127,5 +127,35 @@ $(function () {
     $("#calendar").on("click",".event-container", function(e) {
         toastr.success("Event selected!")
         event_index.val($(this)[0].dataset.eventIndex)
+    })
+
+    //REMOVE EVENT
+    $(window).on("keyup", function(e) {
+        if(e.which == 46){
+            if(!event_index.val()) return toastr.warning("Select event to remove")
+
+            $(".loading").css({
+                display: "block"
+            })
+
+            $.ajax({
+                url: `/api/event/delete?event_id=${event_index.val()}`,
+                type: "DELETE",
+                success: (res) => {
+                    if(!res.operation) return toastr.warning("Something went wrong")
+                    toastr.success(res.msg)
+                    $('#calendar').evoCalendar('removeCalendarEvent', event_index.val());
+                },
+                error: (err) => {
+                    toastr.error("Server Error")
+                    console.log(err)
+                },
+                complete: () => {
+                    $(".loading").css({
+                        display: "none"
+                    })
+                }
+            })
+        }
     })
 })
