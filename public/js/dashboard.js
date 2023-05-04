@@ -16,35 +16,41 @@ $(function () {
     })
 
     //INITIALIZE EVENTS
-    $.ajax({
-        url: `/api/event/get?username=${username}`,
-        type: "GET",
-        success: (res) => {
+    function fetchEvents(destroy) {
+        $.ajax({
+            url: `/api/event/get?username=${username}`,
+            type: "GET",
+            success: (res) => {
 
-            const parsed = res.map((e) => ({
-                id: e.id,
-                description: e.description,
-                name: e.badge,
-                date: e.event_date,
-                type: 'holiday'
-            }))
+                const parsed = res.map((e) => ({
+                    id: e.id,
+                    description: e.description,
+                    name: e.badge,
+                    date: e.event_date,
+                    type: 'holiday'
+                }))
 
-            $('#calendar').evoCalendar({
-                'sidebarDisplayDefault': false,
-                'theme': 'Midnight Blue',
-                'calendarEvents': parsed
-            });
-        },
-        error: (error) => {
-            toastr.error("Server Error")
-            console.log(error)
-        },
-        complete: () => {
-            $(".loading").css({
-                display: "none"
-            })
-        }
-    })
+                if(destroy) $("#calendar").evoCalendar("destroy")
+
+                $('#calendar').evoCalendar({
+                    'sidebarDisplayDefault': false,
+                    'theme': 'Midnight Blue',
+                    'calendarEvents': parsed
+                });
+            },
+            error: (error) => {
+                toastr.error("Server Error")
+                console.log(error)
+            },
+            complete: () => {
+                $(".loading").css({
+                    display: "none"
+                })
+            }
+        })
+    }
+
+    fetchEvents()
 
     $("#add").click(function () {
         $(".event-shadow").fadeToggle("fast")
@@ -100,13 +106,14 @@ $(function () {
             }),
             success: (res) => {
                 toastr.success(res.msg)
-                location.reload()
+                fetchEvents(true)
             },
             error: (err) => {
                 toastr.success("Server Error")
                 console.log(err)
             },
             complete: () => {
+                $(".event-shadow").fadeToggle("fast")
                 $(".loading").css({
                     display: "none"
                 })
