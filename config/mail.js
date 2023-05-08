@@ -1,9 +1,10 @@
+require("dotenv").config({ path: `${process.cwd()}/.env` })
 const nodemailer = require("nodemailer");
 const Sendinblue = require("nodemailer-sendinblue-transport");
 
 module.exports = (email, req) => {
     return nodemailer.createTransport(new Sendinblue({
-        apiKey: ""
+        apiKey: process.env.API_KEY
     })).sendMail({
         from: `"Bert's Piggery" <plogic9@gmail.com>`,
         to: email,
