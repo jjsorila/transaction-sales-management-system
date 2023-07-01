@@ -16,33 +16,48 @@ $(function () {
         e.preventDefault()
     })
 
-    $("#dataTable").DataTable({
+    let table = $("#dataTable").DataTable({
         ajax: '/api/transactions',
+        responsive: true,
         lengthMenu: [[10, 20, 30, 50, -1], [10, 20, 30, 50, "All"]],
+        "headerCallback": function(thead) {
+            $(thead).find("th").addClass("text-center")
+        },
         ordering: false,
         columns: [
             {
-                data: "recipient"
+                title: "RECIPIENT",
+                data: "recipient",
+                responsivePriority: 1
             },
             {
-                data: "quantity"
+                title: "QUANTITY",
+                data: "quantity",
+                responsivePriority: 2
             },
             {
+                title: "PRICE PER UNIT",
                 data: "unit_price",
                 render: (price) => {
                     return `₱ ${price}`
-                }
+                },
+                responsivePriority: 3
             },
             {
+                title: "TOTAL PRICE",
                 data: "total_price",
                 render: (price) => {
                     return `₱ ${price}`
-                }
+                },
+                responsivePriority: 4
             },
             {
-                data: "transaction_date"
+                title: "DATE",
+                data: "transaction_date",
+                responsivePriority: 5
             },
             {
+                title: "ACTIONS",
                 data: "transaction_id",
                 render: (id) => {
                     return `
@@ -51,7 +66,8 @@ $(function () {
                         <button type="button" id="${id}" class="btn btn-danger border border-dark border-3 delete">DELETE</button>
                     </div>
                     `
-                }
+                },
+                responsivePriority: 6
             }
         ],
         "fnInitComplete": (settings, { data }) => {
@@ -85,7 +101,7 @@ $(function () {
                 transaction_date: transaction_date.val()
             }),
             success: (res) => {
-                $("#dataTable").DataTable().ajax.reload(function ({ data }) {
+                table.ajax.reload(function ({ data }) {
                     let total = 0
                     data.forEach((expense, index) => {
                         const { unit_price, quantity } = expense
@@ -123,7 +139,7 @@ $(function () {
             url: `/api/transaction/${id}`,
             type: "DELETE",
             success: (res) => {
-                $("#dataTable").DataTable().ajax.reload(function ({ data }) {
+                table.ajax.reload(function ({ data }) {
                     let total = 0
                     data.forEach((expense, index) => {
                         const { unit_price, quantity } = expense
@@ -196,59 +212,9 @@ $(function () {
         let end = range[1]
 
 
-        $("#dataTable").DataTable({
-            ajax: `/api/transactions/range?start=${start}&end=${end}`,
-            lengthMenu: [[10, 20, 30, 50, -1], [10, 20, 30, 50, "All"]],
-            ordering: false,
-            columns: [
-                {
-                    data: "recipient"
-                },
-                {
-                    data: "quantity"
-                },
-                {
-                    data: "unit_price",
-                    render: (price) => {
-                        return `₱ ${price}`
-                    }
-                },
-                {
-                    data: "total_price",
-                    render: (price) => {
-                        return `₱ ${price}`
-                    }
-                },
-                {
-                    data: "transaction_date"
-                },
-                {
-                    data: "transaction_id",
-                    render: (id) => {
-                        return `
-                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-                            <button type="button" id="${id}" class="btn btn-warning border border-dark border-3 print">PRINT</button>
-                            <button type="button" id="${id}" class="btn btn-danger border border-dark border-3 delete">DELETE</button>
-                        </div>
-                        `
-                    }
-                }
-            ],
-            "fnInitComplete": (settings, { data }) => {
-                let total = 0
-                data.forEach((expense, index) => {
-                    const { unit_price, quantity } = expense
-                    total += (quantity * unit_price)
-                })
-
-                $(".total").text(`Total Income: ₱ ${total}`)
-
-                $(".loading").css({
-                    display: "none"
-                })
-            },
-            destroy: true
-        })
+        table.ajax.url(`/api/transactions/range?start=${start}&end=${end}`).load($(".loading").css({
+            display: "none"
+        }))
 
     })
 

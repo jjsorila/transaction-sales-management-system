@@ -16,39 +16,55 @@ $(function () {
         e.preventDefault()
     })
 
-    $("#dataTable").DataTable({
+    let table = $("#dataTable").DataTable({
         ajax: '/api/expenses',
         lengthMenu: [[10, 20, 30, 50, -1], [10, 20, 30, 50, "All"]],
+        "headerCallback": function(thead) {
+            $(thead).find("th").addClass("text-center")
+        },
+        responsive: true,
         ordering: false,
         columns: [
             {
-                data: "item"
+                title: "ITEM",
+                data: "item",
+                responsivePriority: 1
             },
             {
-                data: "quantity"
+                title: "QUANTITY",
+                data: "quantity",
+                responsivePriority: 2
             },
             {
+                title: "PRICE PER UNIT",
                 data: "unit_price",
                 render: (price) => {
                     return `₱ ${price}`
-                }
+                },
+                responsivePriority: 3
             },
             {
+                title: "TOTAL PRICE",
                 data: "total_price",
                 render: (price) => {
                     return `₱ ${price}`
-                }
+                },
+                responsivePriority: 4
             },
             {
-                data: "expense_date"
+                title: "DATE",
+                data: "expense_date",
+                responsivePriority: 5
             },
             {
+                title: "ACTIONS",
                 data: "id",
                 render: (id) => {
                     return `
                     <button type="button" id="${id}" class="btn btn-danger border border-dark border-3 delete">DELETE</button>
                     `
-                }
+                },
+                responsivePriority: 6
             }
         ],
         "fnInitComplete": (settings, { data }) => {
@@ -82,7 +98,7 @@ $(function () {
                 expense_date: expense_date.val()
             }),
             success: (res) => {
-                $("#dataTable").DataTable().ajax.reload(function ({ data }) {
+                table.ajax.reload(function ({ data }) {
                     let total = 0
                     data.forEach((expense, index) => {
                         const { unit_price, quantity } = expense
@@ -120,7 +136,7 @@ $(function () {
             url: `/api/expense/delete?id=${id}`,
             type: "DELETE",
             success: (res) => {
-                $("#dataTable").DataTable().ajax.reload(function ({ data }) {
+                table.ajax.reload(function ({ data }) {
                     let total = 0
                     data.forEach((expense, index) => {
                         const { unit_price, quantity } = expense
@@ -162,54 +178,7 @@ $(function () {
         let end = range[1]
 
 
-        $("#dataTable").DataTable({
-            ajax: `/api/expenses/range?start=${start}&end=${end}`,
-            lengthMenu: [[10, 20, 30, 50, -1], [10, 20, 30, 50, "All"]],
-            ordering: false,
-            columns: [
-                {
-                    data: "item"
-                },
-                {
-                    data: "quantity"
-                },
-                {
-                    data: "unit_price",
-                    render: (price) => {
-                        return `₱ ${price}`
-                    }
-                },
-                {
-                    data: "total_price",
-                    render: (price) => {
-                        return `₱ ${price}`
-                    }
-                },
-                {
-                    data: "expense_date"
-                },
-                {
-                    data: "id",
-                    render: (id) => {
-                        return `
-                        <button type="button" id="${id}" class="btn btn-danger border border-dark border-3 delete">DELETE</button>
-                        `
-                    }
-                }
-            ],
-            "fnInitComplete": (settings, { data }) => {
-                let total = 0
-                data.forEach((expense, index) => {
-                    const { unit_price, quantity } = expense
-                    total += (quantity * unit_price)
-                })
-                $(".total").text(`Total Expense: ₱ ${total}`)
-                $(".loading").css({
-                    display: "none"
-                })
-            },
-            destroy: true
-        })
+        table.ajax.url(`/api/expenses/range?start=${start}&end=${end}`).load()
 
     })
 

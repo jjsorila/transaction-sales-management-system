@@ -16,18 +16,27 @@ $(function() {
     }
 
     //INITIALIZE DATATABLE
-    $("#dataTable").DataTable({
+    let table = $("#dataTable").DataTable({
         ajax: '/api/accounts/get',
         lengthMenu: [[10, 20, 30, 50, -1], [10, 20, 30, 50, "All"]],
+        "headerCallback": function(thead) {
+            $(thead).find("th").addClass("text-center")
+        },
         ordering: false,
+        responsive: true,
         columns: [
             {
-                data: "username"
+                title: "Username",
+                data: "username",
+                responsivePriority: 1
             },
             {
-                data: "email"
+                title: "Email",
+                data: "email",
+                responsivePriority: 2
             },
             {
+                title: "Actions",
                 data: "username",
                 render: (username) => {
                     return `
@@ -36,7 +45,8 @@ $(function() {
                         ${username == "admin" ? '' : `<button type="button" id="${username}" class="btn btn-danger border border-dark border-3 delete">DELETE</button>`}
                     </div>
                     `
-                }
+                },
+                responsivePriority: 3
             }
         ]
     })
@@ -117,7 +127,7 @@ $(function() {
             }),
             success: (res) => {
                 if(!res.operation) return toastr.error("Something went wrong")
-                $("#dataTable").DataTable().ajax.reload()
+                table.ajax.reload()
                 $(".edit-shadow").fadeToggle("fast")
                 return toastr.success(res.msg)
             },
@@ -149,7 +159,7 @@ $(function() {
             type: "DELETE",
             success: (res) => {
                 if(!res.operation) return toastr.error("Something went wrong")
-                $("#dataTable").DataTable().ajax.reload()
+                table.ajax.reload()
                 $(".c-warning").fadeToggle("fast")
                 return toastr.success(res.msg)
             },
@@ -189,7 +199,7 @@ $(function() {
             }),
             success: (res) => {
                 if(!res.operation) return toastr.error(res.msg)
-                $("#dataTable").DataTable().ajax.reload()
+                table.ajax.reload()
                 clearInput()
                 $(".add-shadow").fadeToggle("fast")
                 return toastr.success(res.msg)
