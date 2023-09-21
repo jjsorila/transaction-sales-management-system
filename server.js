@@ -4,7 +4,7 @@ const db = require("./config/db");
 const cookieSession = require("cookie-session");
 
 //GLOBAL MIDDLEWARES
-app.set("view engin", "ejs")
+app.set("view engine", "ejs")
 app.use(express.static("public"))
 app.use(cookieSession({
     secret: "zNuM1F%Q!w6i6KsY3So^O8y3SGRv%",
@@ -18,7 +18,6 @@ app.use("/api", require("./controllers/api"))
 
 //VIEWS
 app.use("/", require("./controllers/admin"))
-
 
 //DB & PORT CONNECTION
 db.connect((error) => {

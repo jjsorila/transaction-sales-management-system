@@ -29,7 +29,7 @@ $(function() {
             }),
             success: (res) => {
                 if(!res.operation) return toastr.error(res.msg)
-                return location.replace("/dashboard")
+                location.reload(true)
             },
             error: (error) => {
                 toastr.error("Server error")
@@ -86,7 +86,6 @@ $(function() {
     })
 
     $("#reset").click(function(e) {
-        // return toastr.error("Sending reset password link temporarily disabled")
         $(".shadow").fadeToggle("fast")
         clearInput()
     })

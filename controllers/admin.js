@@ -24,7 +24,6 @@ router.get("/reset", (req, res) => {
 
 //DASHBOARD PAGE
 router.get("/dashboard", isLoggedOut, (req, res) => {
-    // req.session = null
     res.render("pages/dashboard.ejs", { admin: req.session.admin })
 })
 
@@ -42,16 +41,5 @@ router.get("/expenses", isLoggedOut, (req, res) => {
 router.get("/transactions", isLoggedOut, (req, res) => {
     res.render("pages/transactions.ejs", { admin: req.session.admin })
 })
-
-//EDIT EXPENSE PAGE
-// router.get("/expenses/:id", isLoggedOut, (req, res) => {
-//     res.render("pages/forms/expense.ejs", { admin: req.session.admin })
-// })
-
-//EDIT TRANSACTION PAGE
-// router.get("/transactions/:id", isLoggedOut, (req, res) => {
-//     res.render("pages/forms/transaction.ejs", { admin: req.session.admin })
-// })
-
 
 module.exports = router;
